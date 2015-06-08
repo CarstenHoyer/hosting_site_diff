@@ -54,3 +54,38 @@ function hosting_site_diff_op_snapshot($nodes) {
   }
 }
 ```
+I now have a new frontend task available `Snapshot`. But before I can actually execute it, it needs a backend function to get triggered. I define that in provision_site_diff (the drush extension). I leave the function empty, because I'm not going to use it. If all I needed to do, was run commands in the context of a site, I would do it from here, but I need to save to the db of Aegir - the solution is the next step.
+
+```PHP
+/**
+ * Implementation of hook_drush_command().
+ */
+function provision_site_diff_drush_command() {
+  $items['provision-snapshot'] = array(
+    'description' => 'Saves a timestamped config snapshot of a site.',
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements the provision-snapshot command.
+ */
+function drush_provision_site_diff_provision_snapshot() {
+  // EMPTY
+}
+```
+
+Next, as written above, since I need to write to Aegirs DB, I have to listen for the task in hsoting_site_diff:
+```PHP
+/**
+* Implementation of drush_hook_pre_hosting_task()
+*/
+function drush_hosting_site_diff_post_hosting_task() {
+  $task =& drush_get_context('HOSTING_TASK');
+  if ($task->ref->type == 'site' && ($task->task_type == 'snapshot')) {
+    //...do stuff
+  }
+}
+```
