@@ -89,3 +89,4 @@ function drush_hosting_site_diff_post_hosting_task() {
   }
 }
 ```
+The rest is regular Drupal :)
