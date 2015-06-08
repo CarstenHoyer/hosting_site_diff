@@ -77,7 +77,7 @@ function drush_provision_site_diff_provision_snapshot() {
 }
 ```
 
-Next, as written above, since I need to write to Aegirs DB, I have to listen for the task in hsoting_site_diff:
+Next, as written above, since I need to write to Aegirs DB, I have to listen for the task in a .drush.inc file in hosting_site_diff:
 ```PHP
 /**
 * Implementation of drush_hook_pre_hosting_task()
