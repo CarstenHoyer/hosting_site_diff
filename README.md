@@ -14,7 +14,7 @@ This module consist of hosting_site_diff and provision_site_diff.
 
 In hosting_site_diff I define a new hosting task:
 
-```
+```PHP
 /**
  * Implements hook_hosting_tasks().
  */
@@ -26,7 +26,7 @@ function hosting_site_diff_hosting_tasks() {
     'description' => t('Make a snapshot available for site diff.'),
     'dialog' => TRUE,
     'hidden' => FALSE,
-    );
+  );
 
   return $tasks;
 }
@@ -40,7 +40,7 @@ function hosting_site_diff_node_operations() {
   $operations['site-diff-snapshot'] = array(
     'label' => t('Site: Config Snapshot'),
     'callback' => 'site_diff_op_snapshot',
-    );
+  );
 
   return $operations;
 }
